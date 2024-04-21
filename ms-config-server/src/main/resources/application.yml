@@ -1,0 +1,16 @@
+server:
+  port: 7070
+
+
+
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Samuel-910/Proyecto-Integrador-2024-I.git # ruta del repositorio git
+          searchPaths: config-data
+          default-label: main
