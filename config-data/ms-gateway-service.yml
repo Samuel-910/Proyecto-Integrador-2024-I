@@ -21,6 +21,7 @@ spring:
           uri: lb://ms-empresa-service
           predicates:
             - Path=/convenio/**, /empresa/**, /convocatoria/**
+
         - id: ms-practicante-service
           uri: lb://ms-practicante-service
           predicates:

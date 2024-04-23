@@ -1,7 +1,5 @@
 package com.example.mspracticante.controller;
 
-import com.example.msempresa.entity.Empresa;
-import com.example.msempresa.service.EmpresaService;
 import com.example.mspracticante.entity.Informe_ppp;
 import com.example.mspracticante.service.Informe_pppService;
 import org.springframework.beans.factory.annotation.Autowired;
