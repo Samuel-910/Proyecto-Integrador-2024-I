@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ms-config-server" />
+        <module name="ms-practicante" />
         <module name="ms-registry-server" />
         <module name="ms-empresa" />
         <module name="ms-gateway-service" />
@@ -19,6 +20,7 @@
       <module name="ms-config-server" options="-parameters" />
       <module name="ms-empresa" options="-parameters" />
       <module name="ms-gateway-service" options="-parameters" />
+      <module name="ms-practicante" options="-parameters" />
       <module name="ms-registry-server" options="-parameters" />
     </option>
   </component>
