@@ -25,7 +25,7 @@ spring:
         - id: ms-practicante-service
           uri: lb://ms-practicante-service
           predicates:
-            - Path=/Carta_aceptacion/**, /carta_presentacion/**, /constancia/**, /informe_ppp/**, /inscripcion_convocatoria/**, /plan_ppp/**, /practicante/**
+            - Path=/carta_aceptacion/**, /carta_presentacion/**, /constancia/**, /informe_ppp/**, /inscripcion_convocatoria/**, /plan_ppp/**, /practicante/**
 
         - id: ms-consejo-service
           uri: lb://ms-consejo-service
