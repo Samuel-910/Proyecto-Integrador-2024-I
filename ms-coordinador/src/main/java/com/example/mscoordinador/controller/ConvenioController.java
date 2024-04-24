@@ -25,7 +25,7 @@ public class ConvenioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Convenio> buscarPOrId(@PathVariable(required = true) Integer id) {
+    public ResponseEntity<Convenio> buscarPorId(@PathVariable(required = true) Integer id) {
         return ResponseEntity.ok(convenioService.buscarPorId(id).get());
     }
 
