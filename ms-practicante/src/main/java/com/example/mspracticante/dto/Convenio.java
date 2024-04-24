@@ -1,15 +1,12 @@
-package com.example.mscoordinador.entity;
+package com.example.mspracticante.dto;
 
-import com.example.mscoordinador.dto.Practicante;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.time.LocalDate;
-@Entity
 @Data
 public class Convenio {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String convenioTipoConvenio;
     private LocalDate convenioFechaInicio;
@@ -21,6 +18,4 @@ public class Convenio {
     private Empresa empresa;
     private String convenioArchivo;
     private Integer practicanteId;
-    @Transient
-    Practicante practicante;
 }

@@ -24,7 +24,7 @@ public class PracticanteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Practicante> buscarPOrId(@PathVariable(required = true) Integer id) {
+    public ResponseEntity<Practicante> buscarPorId(@PathVariable(required = true) Integer id) {
         return ResponseEntity.ok(practicanteService.buscarPorId(id).get());
     }
 

@@ -1,5 +1,6 @@
 package com.example.mspracticante.entity;
 
+import com.example.mspracticante.dto.Convocatoria;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -11,11 +12,15 @@ public class Inscripcion_convocatoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String inscripcionEstado;
-    private Long convocatoriaId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "practicante_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Practicante practicante;
     private String inscripcionGanador;
+
+    private String convocatoriaId;
+
+    @Transient
+    Convocatoria convocatoria;
 
 }

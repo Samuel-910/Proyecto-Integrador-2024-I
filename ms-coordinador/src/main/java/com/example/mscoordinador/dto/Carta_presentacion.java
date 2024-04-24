@@ -1,15 +1,12 @@
-package com.example.mspracticante.entity;
+package com.example.mscoordinador.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
 
-@Entity
 @Data
 public class Carta_presentacion {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "practicante_id")

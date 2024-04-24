@@ -1,6 +1,7 @@
 package com.example.mspracticante.service.impl;
 
 import com.example.mspracticante.entity.Inscripcion_convocatoria;
+import com.example.mspracticante.feign.ConvocatoriaFeign;
 import com.example.mspracticante.repository.Inscripcion_convocatoriaRepository;
 import com.example.mspracticante.service.Inscripcion_convocatoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import java.util.Optional;
 @Service
 public class Inscripcion_convocatoriaServiceImpl implements Inscripcion_convocatoriaService {
     @Autowired
-
     Inscripcion_convocatoriaRepository inscripcion_convocatoriaRepository;
+
+    @Autowired
+    private ConvocatoriaFeign convocatoriaFeign;
 
     @Override
     public List<Inscripcion_convocatoria> listar() {

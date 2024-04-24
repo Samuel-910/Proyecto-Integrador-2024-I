@@ -1,6 +1,7 @@
 package com.example.mscoordinador.service.impl;
 
 import com.example.mscoordinador.entity.Convenio;
+import com.example.mscoordinador.feign.PracticanteFeign;
 import com.example.mscoordinador.repository.ConvenioRepository;
 import com.example.mscoordinador.service.ConvenioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class ConvenioServiceImpl implements ConvenioService {
     @Autowired
 
     ConvenioRepository convenioRepository;
+    @Autowired
+    private PracticanteFeign practicanteFeign;
 
     @Override
     public List<Convenio> listar() {
@@ -27,7 +30,9 @@ public class ConvenioServiceImpl implements ConvenioService {
 
     @Override
     public Optional<Convenio> buscarPorId(Integer id) {
-        return convenioRepository.findById(id);
+        Convenio convenio = convenioRepository.findById(id).get();
+        convenio.setPracticante(practicanteFeign.buscarPorId(convenio.getPracticante()).getBody());
+        return Optional.of(convenio);
     }
 
     @Override
