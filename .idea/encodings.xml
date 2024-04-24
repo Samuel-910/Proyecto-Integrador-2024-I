@@ -2,9 +2,12 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/ms-config-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-consejo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-coordinador/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-empresa/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-gateway-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-practicante/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ms-registry-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-supervisor/src/main/java" charset="UTF-8" />
   </component>
 </project>

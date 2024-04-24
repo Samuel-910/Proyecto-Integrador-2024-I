@@ -17,13 +17,22 @@ spring:
         locator:
           enable: true
       routes:
-        - id: ms-empresa-service
-          uri: lb://ms-empresa-service
+        - id: ms-coordinador-service
+          uri: lb://ms-coordinador-service
           predicates:
             - Path=/convenio/**, /empresa/**, /convocatoria/**
 
         - id: ms-practicante-service
           uri: lb://ms-practicante-service
           predicates:
-            - Path=/carta_aceptacion/**, /carta_presentacion/**, /constancia/**, /informe_ppp/**, /inscripcion_convocatoria/**, /plan_ppp/**, /practicante/**
+            - Path=/Carta_aceptacion/**, /carta_presentacion/**, /constancia/**, /informe_ppp/**, /inscripcion_convocatoria/**, /plan_ppp/**, /practicante/**
 
+        - id: ms-consejo-service
+          uri: lb://ms-consejo-service
+          predicates:
+            - Path=/consejo/**
+
+        - id: ms-supervisor-service
+          uri: lb://ms-supervisor-service
+          predicates:
+            - Path=/supervisor/**
