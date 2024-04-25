@@ -29,8 +29,10 @@ public class Inscripcion_convocatoriaServiceImpl implements Inscripcion_convocat
     }
 
     @Override
-    public Optional<Inscripcion_convocatoria> buscarPorId(Integer id) {
-        return inscripcion_convocatoriaRepository.findById(id);
+    public Inscripcion_convocatoria buscarPorId(Integer id) {
+        Inscripcion_convocatoria inscripcion_convocatoria = inscripcion_convocatoriaRepository.findById(id).get();
+        inscripcion_convocatoria.setConvocatoriaDto(convocatoriaFeign.buscarPOrId(inscripcion_convocatoria.getConvocatoriaId()).getBody());
+        return inscripcion_convocatoria;
     }
 
     @Override

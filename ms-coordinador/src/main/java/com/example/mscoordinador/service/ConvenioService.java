@@ -10,7 +10,7 @@ public interface ConvenioService {
 
     public Convenio guardar(Convenio convenio);
 
-    public Optional<Convenio> buscarPorId(Integer id);
+    public Convenio buscarPorId(Integer id);
 
     public Convenio actualizar(Convenio convenio);
 

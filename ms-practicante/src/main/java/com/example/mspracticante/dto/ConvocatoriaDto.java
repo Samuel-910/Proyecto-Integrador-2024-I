@@ -1,12 +1,10 @@
 package com.example.mspracticante.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
 import lombok.Data;
 
 
 @Data
-public class Convocatoria {
+public class ConvocatoriaDto {
     private Integer id;
     private String convocatoriaSalario;
     private String convocatoriaTitulo;
@@ -19,8 +17,5 @@ public class Convocatoria {
     private String convocatoriaFechaFin;
     private String convocatoriaEstado;
     private Integer convocatoriaFormaAca;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "empresa_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Empresa empresa;
+    private EmpresaDto empresa;
 }

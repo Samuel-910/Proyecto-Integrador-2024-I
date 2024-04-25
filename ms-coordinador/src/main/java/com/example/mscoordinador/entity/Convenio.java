@@ -1,5 +1,6 @@
 package com.example.mscoordinador.entity;
 
+import com.example.mscoordinador.dto.PracticanteDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -20,4 +21,6 @@ public class Convenio {
     private Empresa empresa;
     private String convenioArchivo;
     private Integer practicanteId;
+    @Transient
+    PracticanteDto practicanteDto;
 }

@@ -1,6 +1,6 @@
 package com.example.mspracticante.entity;
 
-import com.example.mspracticante.dto.Convocatoria;
+import com.example.mspracticante.dto.ConvocatoriaDto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -18,9 +18,9 @@ public class Inscripcion_convocatoria {
     private Practicante practicante;
     private String inscripcionGanador;
 
-    private String convocatoriaId;
+    private Integer convocatoriaId;
 
     @Transient
-    Convocatoria convocatoria;
+    ConvocatoriaDto convocatoriaDto;
 
 }

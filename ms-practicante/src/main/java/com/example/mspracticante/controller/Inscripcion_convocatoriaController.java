@@ -26,7 +26,7 @@ public class Inscripcion_convocatoriaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Inscripcion_convocatoria> buscarPOrId(@PathVariable(required = true) Integer id) {
-        return ResponseEntity.ok(inscripcion_convocatoriaService.buscarPorId(id).get());
+        return ResponseEntity.ok(inscripcion_convocatoriaService.buscarPorId(id));
     }
 
     @PutMapping
