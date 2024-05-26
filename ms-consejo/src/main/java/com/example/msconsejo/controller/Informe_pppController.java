@@ -1,7 +1,8 @@
-package com.example.mspracticante.controller;
+package com.example.msconsejo.controller;
 
-import com.example.mspracticante.entity.Informe_ppp;
-import com.example.mspracticante.service.Informe_pppService;
+
+import com.example.msconsejo.entity.Informe_ppp;
+import com.example.msconsejo.service.Informe_pppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class Informe_pppController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Informe_ppp> buscarPOrId(@PathVariable(required = true) Integer id) {
-        return ResponseEntity.ok(informe_pppService.buscarPorId(id).get());
+        return ResponseEntity.ok(informe_pppService.buscarPorId(id));
     }
 
     @PutMapping
