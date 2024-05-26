@@ -1,7 +1,7 @@
-package com.example.mspracticante.controller;
+package com.example.mscoordinador.controller;
 
-import com.example.mspracticante.entity.Carta_presentacion;
-import com.example.mspracticante.service.Carta_presentacionService;
+import com.example.mscoordinador.entity.Carta_presentacion;
+import com.example.mscoordinador.service.Carta_presentacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +25,8 @@ public class Carta_presentacionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Carta_presentacion> buscarPOrId(@PathVariable(required = true) Integer id) {
-        return ResponseEntity.ok(carta_presentacionService.buscarPorId(id).get());
+    public ResponseEntity<Carta_presentacion> buscarPorId(@PathVariable(required = true) Integer id) {
+        return ResponseEntity.ok(carta_presentacionService.buscarPorId(id));
     }
 
     @PutMapping

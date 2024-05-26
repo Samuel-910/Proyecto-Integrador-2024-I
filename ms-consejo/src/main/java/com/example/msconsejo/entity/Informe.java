@@ -1,13 +1,13 @@
 package com.example.msconsejo.entity;
 
 import com.example.msconsejo.dto.PracticanteDto;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
-
-@Entity
 @Data
-public class Informe_ppp {
+@Entity
+public class Informe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; // ID único para cada informe.
@@ -24,4 +24,5 @@ public class Informe_ppp {
 
     @Transient
     PracticanteDto practicanteDto;
+
 }

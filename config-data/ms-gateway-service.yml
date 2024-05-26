@@ -20,12 +20,12 @@ spring:
         - id: ms-coordinador-service
           uri: lb://ms-coordinador-service
           predicates:
-            - Path=/convenio/**, /empresa/**, /convocatoria/**
+            - Path=/convenio/**, /empresa/**, /convocatoria/**, /carta_presentacion/**, /coordinador/**, /induccion/**
 
         - id: ms-practicante-service
           uri: lb://ms-practicante-service
           predicates:
-            - Path=/carta_aceptacion/**, /carta_presentacion/**, /constancia/**, /informe_ppp/**, /inscripcion_convocatoria/**, /plan_ppp/**, /practicante/**
+            - Path=/carta_aceptacion/**, /constancia/**, /inscripcion_convocatoria/**, /plan_ppp/**, /practicante/**
 
         - id: ms-consejo-service
           uri: lb://ms-consejo-service

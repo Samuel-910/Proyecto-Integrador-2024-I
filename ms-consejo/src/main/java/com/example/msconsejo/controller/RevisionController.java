@@ -1,9 +1,7 @@
 package com.example.msconsejo.controller;
 
 
-import com.example.msconsejo.entity.Informe_ppp;
 import com.example.msconsejo.entity.Revision;
-import com.example.msconsejo.service.Informe_pppService;
 import com.example.msconsejo.service.RevisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

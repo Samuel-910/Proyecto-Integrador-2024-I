@@ -25,7 +25,7 @@ public class EmpresaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Empresa> buscarPOrId(@PathVariable(required = true) Integer id) {
-        return ResponseEntity.ok(empresaService.buscarPorId(id).get());
+        return ResponseEntity.ok(empresaService.buscarPorId(id));
     }
 
     @PutMapping

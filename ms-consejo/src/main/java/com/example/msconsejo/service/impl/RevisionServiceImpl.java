@@ -1,6 +1,7 @@
 package com.example.msconsejo.service.impl;
 
 import com.example.msconsejo.entity.Revision;
+import com.example.msconsejo.repository.InformeRepository;
 import com.example.msconsejo.repository.RevisionRepository;
 import com.example.msconsejo.service.RevisionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,8 @@ import java.util.Optional;
 public class RevisionServiceImpl implements RevisionService {
     @Autowired
     RevisionRepository revisionRepository;
-
+    @Autowired
+    private InformeRepository informeRepository;
     @Override
     public List<Revision> listar() {
         return revisionRepository.findAll();
@@ -23,13 +25,12 @@ public class RevisionServiceImpl implements RevisionService {
 
     @Override
     public Revision guardar(Revision revision) {
-        if (revision.getInforme() == null || !revisionRepository.existsById(revision.getInforme().getId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa con ID " + revision.getInforme().getId() + " no encontrada.");
+        if (revision.getInforme() == null || !informeRepository.existsById(revision.getInforme().getId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Informe con ID " + revision.getInforme().getId() + " no encontrada.");
         }
 
         return revisionRepository.save(revision);
     }
-
 
     @Override
     public Optional<Revision> buscarPorId(Integer id) {

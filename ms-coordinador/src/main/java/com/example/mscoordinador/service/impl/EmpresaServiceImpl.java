@@ -24,8 +24,8 @@ public class EmpresaServiceImpl implements EmpresaService {
     }
 
     @Override
-    public Optional<Empresa> buscarPorId(Integer id) {
-        return empresaRepository.findById(id);
+    public Empresa buscarPorId(Integer id) {
+        return empresaRepository.findById(id).orElse(null);
     }
 
     @Override
