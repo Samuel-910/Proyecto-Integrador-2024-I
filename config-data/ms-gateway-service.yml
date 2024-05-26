@@ -30,7 +30,7 @@ spring:
         - id: ms-consejo-service
           uri: lb://ms-consejo-service
           predicates:
-            - Path=/informe_ppp/**, /revision/**
+            - Path=/informe/**, /revision/**
 
         - id: ms-supervisor-service
           uri: lb://ms-supervisor-service

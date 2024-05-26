@@ -12,9 +12,9 @@ public class Revision {
     private Integer id; // ID único para cada Revicion.
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "informe_ppp_id", nullable = false)
+    @JoinColumn(name = "informe_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Informe_ppp informe_ppp; // Relación con la tabla Informes como clave foránea.
+    private Informe_ppp informe; // Relación con la tabla Informes como clave foránea.
 
     @Column(nullable = false)
     private String decision; // Enum ('Aprobado', 'Rechazado').

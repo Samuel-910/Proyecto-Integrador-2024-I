@@ -23,11 +23,13 @@ public class RevisionServiceImpl implements RevisionService {
 
     @Override
     public Revision guardar(Revision revision) {
-        if (revision.getInforme_ppp() == null || !revisionRepository.existsById(revision.getInforme_ppp().getId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Revision con ID " + revision.getInforme_ppp().getId() + " no encontrada.");
+        if (revision.getInforme() == null || !revisionRepository.existsById(revision.getInforme().getId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa con ID " + revision.getInforme().getId() + " no encontrada.");
         }
+
         return revisionRepository.save(revision);
     }
+
 
     @Override
     public Optional<Revision> buscarPorId(Integer id) {

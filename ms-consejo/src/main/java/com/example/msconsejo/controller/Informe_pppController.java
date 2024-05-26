@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping("/informe_ppp")
+@RequestMapping("/informe")
 public class Informe_pppController {
     @Autowired
     private Informe_pppService informe_pppService;
