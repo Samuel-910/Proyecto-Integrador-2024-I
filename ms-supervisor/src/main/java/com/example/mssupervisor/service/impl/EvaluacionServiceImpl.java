@@ -38,9 +38,6 @@ public class EvaluacionServiceImpl implements EvaluacionService {
     @Override
     public Evaluacion guardar(Evaluacion evaluacion) {
 
-        if (evaluacion.getSupervisor() == null || !supervisorRepository.existsById(evaluacion.getSupervisor().getId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa con ID " + evaluacion.getSupervisor().getId() + " no encontrada.");
-        }
         ResponseEntity<?> response = practicanteFeign.buscarPorId(evaluacion.getPracticanteId());
         if (response.getStatusCode().is4xxClientError()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Practicante con ID " + evaluacion.getPracticanteId() + " no encontrado.");

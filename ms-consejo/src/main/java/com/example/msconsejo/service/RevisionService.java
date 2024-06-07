@@ -9,7 +9,7 @@ public interface RevisionService {
 
     public Revision guardar(Revision revision);
 
-    public Optional<Revision> buscarPorId(Integer id);
+    public Revision buscarPorId(Integer id);
 
     public Revision actualizar(Revision revision);
 

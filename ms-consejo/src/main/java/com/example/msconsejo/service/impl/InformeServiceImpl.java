@@ -25,7 +25,12 @@ public class InformeServiceImpl implements InformeService {
 
     @Override
     public List<Informe> listar() {
-        return informeRepository.findAll();
+        List<Informe> informes = informeRepository.findAll();
+        informes.forEach(informe -> {
+            informe.setPracticanteDto(practicanteFeign.buscarPorId(informe.getPracticanteId()).getBody());
+        });
+        return informes;
+
     }
 
     @Override
@@ -39,8 +44,10 @@ public class InformeServiceImpl implements InformeService {
 
 
     @Override
-    public Optional<Informe> buscarPorId(Integer id) {
-        return informeRepository.findById(id);
+    public Informe buscarPorId(Integer id) {
+        Informe informe = informeRepository.findById(id).get();
+        informe.setPracticanteDto(practicanteFeign.buscarPorId(informe.getPracticanteId()).getBody());
+        return informe;
     }
 
     @Override

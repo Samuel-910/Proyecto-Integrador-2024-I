@@ -27,7 +27,7 @@ public class RevisionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Revision> buscarPOrId(@PathVariable(required = true) Integer id) {
-        return ResponseEntity.ok(revisionService.buscarPorId(id).get());
+        return ResponseEntity.ok(revisionService.buscarPorId(id));
     }
 
     @PutMapping

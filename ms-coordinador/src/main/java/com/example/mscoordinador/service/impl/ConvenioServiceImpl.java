@@ -18,8 +18,6 @@ import java.util.Optional;
 public class ConvenioServiceImpl implements ConvenioService {
     @Autowired
     ConvenioRepository convenioRepository;
-    @Autowired
-    private EmpresaRepository empresaRepository;
 
     @Autowired
     private PracticanteFeign practicanteFeign;
@@ -38,9 +36,8 @@ public class ConvenioServiceImpl implements ConvenioService {
 
     @Override
     public Convenio guardar(Convenio convenio) {
-
-        if (convenio.getEmpresa() == null || !empresaRepository.existsById(convenio.getEmpresa().getId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa con ID " + convenio.getEmpresa().getId() + " no encontrada.");
+        if (convenio.getEmpresa() == null || !convenioRepository.existsById(convenio.getEmpresa().getId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa   con ID " + convenio.getEmpresa().getId() + " no encontrada.");
         }
         ResponseEntity<?> response = practicanteFeign.buscarPorId(convenio.getPracticanteId());
         if (response.getStatusCode().is4xxClientError()) {

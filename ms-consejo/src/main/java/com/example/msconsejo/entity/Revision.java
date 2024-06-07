@@ -1,5 +1,6 @@
 package com.example.msconsejo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,6 +13,7 @@ public class Revision {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "informe_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Informe informe; // Relación con la tabla 'Informes' como clave foránea.
 
     @Column(nullable = false)

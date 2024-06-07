@@ -4,7 +4,9 @@ import com.example.mspracticante.entity.Carta_aceptacion;
 import com.example.mspracticante.repository.Carta_aceptacionRepository;
 import com.example.mspracticante.service.Carta_aceptacionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +22,9 @@ public class Carta_aceptacionServiceImpl implements Carta_aceptacionService {
 
     @Override
     public Carta_aceptacion guardar(Carta_aceptacion carta_aceptacion) {
+        if (carta_aceptacion.getPracticante() == null || !carta_aceptacionRepository.existsById(carta_aceptacion.getPracticante().getId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Practicante   con ID " + carta_aceptacion.getPracticante().getId() + " no encontrada.");
+        }
         return carta_aceptacionRepository.save(carta_aceptacion);
     }
 

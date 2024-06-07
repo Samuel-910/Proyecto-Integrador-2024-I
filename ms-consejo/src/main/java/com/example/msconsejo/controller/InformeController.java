@@ -29,7 +29,7 @@ public class InformeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Informe> buscarPOrId(@PathVariable(required = true) Integer id) {
-        return ResponseEntity.ok(informeService.buscarPorId(id).get());
+        return ResponseEntity.ok(informeService.buscarPorId(id));
     }
 
     @PutMapping

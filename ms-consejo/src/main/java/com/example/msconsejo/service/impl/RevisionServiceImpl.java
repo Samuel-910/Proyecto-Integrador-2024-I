@@ -25,16 +25,15 @@ public class RevisionServiceImpl implements RevisionService {
 
     @Override
     public Revision guardar(Revision revision) {
-        if (revision.getInforme() == null || !informeRepository.existsById(revision.getInforme().getId())) {
+        if (revision.getInforme() == null || !revisionRepository.existsById(revision.getInforme().getId())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Informe con ID " + revision.getInforme().getId() + " no encontrada.");
         }
-
         return revisionRepository.save(revision);
     }
 
     @Override
-    public Optional<Revision> buscarPorId(Integer id) {
-        return revisionRepository.findById(id);
+    public Revision buscarPorId(Integer id) {
+        return revisionRepository.findById(id).get();
     }
 
     @Override

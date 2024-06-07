@@ -23,8 +23,8 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
 
     @Override
     public Convocatoria guardar(Convocatoria convocatoria) {
-        if (convocatoria.getEmpresa() == null || !empresaRepository.existsById(convocatoria.getEmpresa().getId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa con ID " + convocatoria.getEmpresa().getId() + " no encontrada.");
+        if (convocatoria.getEmpresa() == null || !convocatoriaRepository.existsById(convocatoria.getEmpresa().getId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa   con ID " + convocatoria.getEmpresa().getId() + " no encontrada.");
         }
         return convocatoriaRepository.save(convocatoria);
     }

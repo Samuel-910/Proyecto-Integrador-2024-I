@@ -34,7 +34,7 @@ public class Inscripcion_convocatoriaServiceImpl implements Inscripcion_convocat
     @Override
     public Inscripcion_convocatoria guardar(Inscripcion_convocatoria inscripcion_convocatoria) {
         if (inscripcion_convocatoria.getPracticante() == null || !inscripcion_convocatoriaRepository.existsById(inscripcion_convocatoria.getPracticante().getId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Practicante con ID " + inscripcion_convocatoria.getPracticante().getId() + " no encontrada.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Practicante   con ID " + inscripcion_convocatoria.getPracticante().getId() + " no encontrada.");
         }
         ResponseEntity<?> response = convocatoriaFeign.buscarPOrId(inscripcion_convocatoria.getConvocatoriaId());
         if (response.getStatusCode().is4xxClientError()) {

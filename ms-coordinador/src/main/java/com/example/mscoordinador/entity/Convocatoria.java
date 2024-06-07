@@ -15,7 +15,7 @@ public class Convocatoria {
     private String convocatoriaTitulo;
     private String convocatoriaPuesto;
     private String convocatoriaDescripcion;
-    private Long convocatoriaVacantes;
+    private Integer convocatoriaVacantes;
     private Integer convocatoriaExperiencia;
     private String convocatoriaIdiomas;
     private String convocatoriaFechaInicio;

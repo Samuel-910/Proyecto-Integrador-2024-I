@@ -9,7 +9,9 @@ import com.example.mscoordinador.repository.InduccionRepository;
 import com.example.mscoordinador.service.InduccionService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,11 +20,6 @@ import java.util.Optional;
 public class InduccionServiceImpl implements InduccionService {
     @Autowired
     InduccionRepository induccionRepository;
-    @Autowired
-    private EmpresaRepository empresaRepository;
-
-    @Autowired
-    private CoordinadorRepository coordinadorRepository;
 
     @Override
     public List<Induccion> listar() {return induccionRepository.findAll();}
@@ -30,24 +27,14 @@ public class InduccionServiceImpl implements InduccionService {
     @Override
     @Transactional
     public Induccion guardar(Induccion induccion) {
-        verificarExistenciaDeEmpresa(induccion.getEmpresa());
-        verificarExistenciaDeCoordinador(induccion.getCoordinador());
+        if (induccion.getEmpresa() == null || !induccionRepository.existsById(induccion.getEmpresa().getId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa   con ID " + induccion.getEmpresa().getId() + " no encontrada.");
+        }
+        if (induccion.getCoordinador() == null || !induccionRepository.existsById(induccion.getCoordinador().getId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Coordinador   con ID " + induccion.getCoordinador().getId() + " no encontrada.");
+        }
         return induccionRepository.save(induccion);
     }
-
-    private void verificarExistenciaDeEmpresa(Empresa empresa) {
-        if (empresa == null || empresa.getId() == null || !empresaRepository.existsById(empresa.getId())) {
-            throw new RuntimeException("Empresa no proporcionada o con ID no encontrado.");
-        }
-    }
-
-    private void verificarExistenciaDeCoordinador(Coordinador coordinador) {
-        if (coordinador == null || coordinador.getId() == null || !coordinadorRepository.existsById(coordinador.getId())) {
-            throw new RuntimeException("Coordinador no proporcionado o con ID no encontrado.");
-        }
-    }
-
-
     @Override
     public Induccion buscarPorId(Integer id) {return induccionRepository.findById(id).orElse(null);}
 

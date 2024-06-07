@@ -10,7 +10,7 @@ public interface InformeService {
 
     public Informe guardar(Informe informe);
 
-    public Optional<Informe> buscarPorId(Integer id);
+    public Informe buscarPorId(Integer id);
 
     public Informe actualizar(Informe informe);
 
