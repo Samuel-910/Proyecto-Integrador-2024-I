@@ -7,6 +7,7 @@ import com.example.mscoordinador.repository.CoordinadorRepository;
 import com.example.mscoordinador.repository.EmpresaRepository;
 import com.example.mscoordinador.repository.InduccionRepository;
 import com.example.mscoordinador.service.InduccionService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,19 +28,25 @@ public class InduccionServiceImpl implements InduccionService {
     public List<Induccion> listar() {return induccionRepository.findAll();}
 
     @Override
+    @Transactional
     public Induccion guardar(Induccion induccion) {
+        verificarExistenciaDeEmpresa(induccion.getEmpresa());
+        verificarExistenciaDeCoordinador(induccion.getCoordinador());
+        return induccionRepository.save(induccion);
+    }
 
-        // Verificar existencia de Coordinador y Empresa
-        Optional<Coordinador> coordinador = coordinadorRepository.findById(induccion.getCoordinador().getId());
-        Optional<Empresa> empresa = empresaRepository.findById(induccion.getEmpresa().getId());
-
-        if (coordinador.isPresent() && empresa.isPresent()) {
-            return induccionRepository.save(induccion);
-        } else {
-            // Manejar el caso cuando no se encuentran las claves foráneas
-            throw new IllegalArgumentException("Coordinador o Empresa no existen.");
+    private void verificarExistenciaDeEmpresa(Empresa empresa) {
+        if (empresa == null || empresa.getId() == null || !empresaRepository.existsById(empresa.getId())) {
+            throw new RuntimeException("Empresa no proporcionada o con ID no encontrado.");
         }
     }
+
+    private void verificarExistenciaDeCoordinador(Coordinador coordinador) {
+        if (coordinador == null || coordinador.getId() == null || !coordinadorRepository.existsById(coordinador.getId())) {
+            throw new RuntimeException("Coordinador no proporcionado o con ID no encontrado.");
+        }
+    }
+
 
     @Override
     public Induccion buscarPorId(Integer id) {return induccionRepository.findById(id).orElse(null);}

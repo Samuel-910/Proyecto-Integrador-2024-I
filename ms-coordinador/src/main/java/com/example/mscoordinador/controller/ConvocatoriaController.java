@@ -26,7 +26,7 @@ public class ConvocatoriaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Convocatoria> buscarPorId(@PathVariable(required = true) Integer id) {
-        return ResponseEntity.ok(convocatoriaService.buscarPorId(id).get());
+        return ResponseEntity.ok(convocatoriaService.buscarPorId(id));
     }
 
     @PutMapping

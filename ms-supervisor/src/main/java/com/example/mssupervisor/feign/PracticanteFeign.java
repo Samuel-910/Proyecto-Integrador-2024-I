@@ -1,6 +1,6 @@
-package com.example.msconsejo.feign;
+package com.example.mssupervisor.feign;
 
-import com.example.msconsejo.dto.PracticanteDto;
+import com.example.mssupervisor.dto.PracticanteDto;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
