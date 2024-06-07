@@ -17,8 +17,6 @@ import java.util.List;
 public class EvaluacionServiceImpl implements EvaluacionService {
     @Autowired
     EvaluacionRepository evaluacionRepository;
-    @Autowired
-    private SupervisorRepository supervisorRepository;
 
     @Autowired
     private PracticanteFeign practicanteFeign;
@@ -37,7 +35,9 @@ public class EvaluacionServiceImpl implements EvaluacionService {
 
     @Override
     public Evaluacion guardar(Evaluacion evaluacion) {
-
+        if (evaluacion.getSupervisor() == null || !evaluacionRepository.existsById(evaluacion.getSupervisor().getId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Supervisor   con ID " + evaluacion.getSupervisor().getId() + " no encontrada.");
+        }
         ResponseEntity<?> response = practicanteFeign.buscarPorId(evaluacion.getPracticanteId());
         if (response.getStatusCode().is4xxClientError()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Practicante con ID " + evaluacion.getPracticanteId() + " no encontrado.");
