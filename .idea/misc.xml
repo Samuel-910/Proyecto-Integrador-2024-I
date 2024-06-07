@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/ms-coordinador/pom.xml" />
         <option value="$PROJECT_DIR$/ms-supervisor/pom.xml" />
         <option value="$PROJECT_DIR$/ms-consejo/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-auth/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
