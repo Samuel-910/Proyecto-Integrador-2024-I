@@ -1,6 +1,7 @@
 package com.example.mscoordinador.service.impl;
 
 import com.example.mscoordinador.entity.Convocatoria;
+import com.example.mscoordinador.entity.Empresa;
 import com.example.mscoordinador.repository.ConvocatoriaRepository;
 import com.example.mscoordinador.repository.EmpresaRepository;
 import com.example.mscoordinador.service.ConvocatoriaService;
@@ -23,9 +24,6 @@ public class ConvocatoriaServiceImpl implements ConvocatoriaService {
 
     @Override
     public Convocatoria guardar(Convocatoria convocatoria) {
-        if (convocatoria.getEmpresa() == null || !convocatoriaRepository.existsById(convocatoria.getEmpresa().getId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa   con ID " + convocatoria.getEmpresa().getId() + " no encontrada.");
-        }
         return convocatoriaRepository.save(convocatoria);
     }
 

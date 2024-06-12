@@ -23,8 +23,6 @@ spring:
           uri: lb://ms-coordinador-service
           predicates:
             - Path=/convenio/**, /empresa/**, /convocatoria/**, /carta_presentacion/**, /coordinador/**, /induccion/**
-          filters:
-            - AuthFilter
 
         - id: ms-practicante-service
           uri: lb://ms-practicante-service

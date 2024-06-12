@@ -1,5 +1,6 @@
 package com.example.mscoordinador.service.impl;
 
+import com.example.mscoordinador.entity.Convocatoria;
 import com.example.mscoordinador.entity.Coordinador;
 import com.example.mscoordinador.entity.Empresa;
 import com.example.mscoordinador.entity.Induccion;
@@ -25,16 +26,10 @@ public class InduccionServiceImpl implements InduccionService {
     public List<Induccion> listar() {return induccionRepository.findAll();}
 
     @Override
-    @Transactional
     public Induccion guardar(Induccion induccion) {
-        if (induccion.getEmpresa() == null || !induccionRepository.existsById(induccion.getEmpresa().getId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa   con ID " + induccion.getEmpresa().getId() + " no encontrada.");
-        }
-        if (induccion.getCoordinador() == null || !induccionRepository.existsById(induccion.getCoordinador().getId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Coordinador   con ID " + induccion.getCoordinador().getId() + " no encontrada.");
-        }
         return induccionRepository.save(induccion);
     }
+
     @Override
     public Induccion buscarPorId(Integer id) {return induccionRepository.findById(id).orElse(null);}
 

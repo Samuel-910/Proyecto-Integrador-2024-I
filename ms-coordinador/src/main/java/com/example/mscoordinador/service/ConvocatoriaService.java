@@ -1,6 +1,7 @@
 package com.example.mscoordinador.service;
 
 import com.example.mscoordinador.entity.Convocatoria;
+
 import java.util.List;
 
 public interface ConvocatoriaService {
