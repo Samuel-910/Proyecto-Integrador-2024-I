@@ -60,4 +60,20 @@ public class AuthUserServiceImpl implements AuthUserService {
             return null;
         return new TokenDto(token);
     }
+
+    public AuthUserDto getUserDetails(String token) {
+        String username = jwtProvider.getUserNameFromToken(token);
+        if (username.equals("bad token")) {
+            return null; // Manejo del error en caso de token inválido
+        }
+        Optional<AuthUser> authUser = authUserRepository.findByUserName(username);
+
+        if (authUser != null) {
+            AuthUserDto authUserDto = new AuthUserDto();
+            authUserDto.setId(authUser.get().getId());
+            authUserDto.setUserName(authUser.get().getUserName());
+            return authUserDto;
+        }
+        return null;
+    }
 }

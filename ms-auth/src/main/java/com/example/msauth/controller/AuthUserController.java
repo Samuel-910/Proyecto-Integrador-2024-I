@@ -37,5 +37,13 @@ public class AuthUserController {
             return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(authUser);
     }
+
+    @GetMapping("/user-details")
+    public ResponseEntity<AuthUserDto> getUserDetails(@RequestParam String token) {
+        AuthUserDto authUserDto = authUserService.getUserDetails(token);
+        if (authUserDto == null)
+            return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(authUserDto);
+    }
 }
 

@@ -12,4 +12,6 @@ public interface AuthUserService {
 
 
     public TokenDto validate(String token);
+
+    public AuthUserDto getUserDetails(String token);
 }
