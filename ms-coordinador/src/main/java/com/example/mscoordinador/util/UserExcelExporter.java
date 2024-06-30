@@ -2,7 +2,6 @@ package com.example.mscoordinador.util;
 
 import java.io.IOException;
 import java.util.List;
-
 import com.example.mscoordinador.entity.Convocatoria;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,7 +36,7 @@ public class UserExcelExporter {
         style.setFont(font);
 
         createCell(row, 0, "ID", style);
-        createCell(row, 1, "Nombre", style);
+        createCell(row, 1, "titulo", style);
 
 
     }

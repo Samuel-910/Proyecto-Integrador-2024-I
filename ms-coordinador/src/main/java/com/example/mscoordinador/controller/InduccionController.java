@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/induccion")
+@CrossOrigin
 public class InduccionController {
     @Autowired
     private InduccionService induccionService;

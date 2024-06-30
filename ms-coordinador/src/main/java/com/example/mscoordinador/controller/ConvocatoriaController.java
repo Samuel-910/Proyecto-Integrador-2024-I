@@ -20,8 +20,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/convocatoria")
+
 public class ConvocatoriaController {
     @Autowired
     private ConvocatoriaService convocatoriaService;

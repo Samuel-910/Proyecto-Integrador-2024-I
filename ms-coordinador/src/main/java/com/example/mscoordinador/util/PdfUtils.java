@@ -1,6 +1,5 @@
 package com.example.mscoordinador.util;
 
-import com.example.mscatalogo.entity.Categoria;
 import com.example.mscoordinador.entity.Convocatoria;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -17,8 +16,6 @@ public class PdfUtils {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PdfWriter.getInstance(document, outputStream);
         document.open();
-        // Write column names
-        // Map<String, Object> firstRow = queryResults.get(0);
         for (Convocatoria convocatoria : convocatorias) {
             Font boldFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
             Paragraph paragraph = new Paragraph(convocatoria.getTitulo(), boldFont);

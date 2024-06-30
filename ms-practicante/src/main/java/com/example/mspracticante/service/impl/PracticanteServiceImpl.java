@@ -34,8 +34,5 @@ public class PracticanteServiceImpl implements PracticanteService {
     }
 
     @Override
-    public void eliminar(Integer id) {
-        practicanteRepository.deleteById(id);
-
-    }
+    public void eliminar(Integer id) { practicanteRepository.deleteById(id); }
 }

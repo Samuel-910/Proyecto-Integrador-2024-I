@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/carta_presentacion")
+@CrossOrigin
 public class Carta_presentacionController {
     @Autowired
     private Carta_presentacionService carta_presentacionService;

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("/empresa")
+@CrossOrigin
 public class EmpresaController {
     @Autowired
     private EmpresaService empresaService;

@@ -15,6 +15,16 @@ eureka:
 spring:
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
       discovery:
         locator:
           enable: true
@@ -22,7 +32,7 @@ spring:
         - id: ms-coordinador-service
           uri: lb://ms-coordinador-service
           predicates:
-            - Path=/convenio/**, /empresa/**, /convocatoria/**, /carta_presentacion/**, /coordinador/**, /induccion/**
+              - Path=/convenio/**, /empresa/**, /convocatoria/**, /carta_presentacion/**, /coordinador/**, /induccion/**
 
         - id: ms-practicante-service
           uri: lb://ms-practicante-service
