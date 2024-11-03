@@ -3,6 +3,7 @@ package com.example.mspracticante.controller;
 import com.example.mspracticante.entity.Inscripcion_convocatoria;
 import com.example.mspracticante.service.Inscripcion_convocatoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ public class Inscripcion_convocatoriaController {
         return ResponseEntity.ok(inscripcion_convocatoriaService.listar());
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseEntity<Inscripcion_convocatoria> guardar(@RequestBody Inscripcion_convocatoria inscripcion_convocatoria) {
         return ResponseEntity.ok(inscripcion_convocatoriaService.guardar(inscripcion_convocatoria));

@@ -11,7 +11,7 @@ public interface EmpresaService {
 
     public Empresa buscarPorId(Integer id);
 
-    public Empresa actualizar(Empresa empresa);
+    public Empresa actualizar(Integer id, Empresa empresa);
 
     public void eliminar(Integer id);
 }

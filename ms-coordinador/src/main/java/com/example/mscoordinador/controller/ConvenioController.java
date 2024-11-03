@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/convenio")
-@CrossOrigin
 public class ConvenioController {
     @Autowired
     private ConvenioService convenioService;

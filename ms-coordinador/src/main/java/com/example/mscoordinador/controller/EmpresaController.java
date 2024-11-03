@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("/empresa")
-@CrossOrigin
 public class EmpresaController {
     @Autowired
     private EmpresaService empresaService;
@@ -29,10 +28,9 @@ public class EmpresaController {
         return ResponseEntity.ok(empresaService.buscarPorId(id));
     }
 
-    @PutMapping
-    public ResponseEntity<Empresa> actualizar(@RequestBody Empresa empresa) {
-        return ResponseEntity.ok(empresaService.actualizar(empresa));
-
+    @PutMapping("/{id}")
+    public ResponseEntity<Empresa> actualizar(@PathVariable(required = true) Integer id,@RequestBody Empresa empresa) {
+        return ResponseEntity.ok(empresaService.actualizar(id,empresa));
     }
 
     @DeleteMapping("/{id}")

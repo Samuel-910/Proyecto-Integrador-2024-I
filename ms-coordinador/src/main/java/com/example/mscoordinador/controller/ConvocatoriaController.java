@@ -42,9 +42,9 @@ public class ConvocatoriaController {
         return ResponseEntity.ok(convocatoriaService.buscarPorId(id));
     }
 
-    @PutMapping
-    public ResponseEntity<Convocatoria> actualizar(@RequestBody Convocatoria convocatoria) {
-        return ResponseEntity.ok(convocatoriaService.actualizar(convocatoria));
+    @PutMapping("/{id}")
+    public ResponseEntity<Convocatoria> actualizar(@PathVariable(required = true) Integer id,@RequestBody Convocatoria convocatoria) {
+        return ResponseEntity.ok(convocatoriaService.actualizar(id, convocatoria));
 
     }
 

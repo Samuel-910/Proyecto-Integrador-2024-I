@@ -20,4 +20,5 @@ public class Empresa {
 
     @Column(nullable = false)
     private String email;
+
 }

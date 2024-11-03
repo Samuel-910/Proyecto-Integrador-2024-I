@@ -33,22 +33,26 @@ spring:
           uri: lb://ms-coordinador-service
           predicates:
               - Path=/convenio/**, /empresa/**, /convocatoria/**, /carta_presentacion/**, /coordinador/**, /induccion/**
-
+          filters:
+            - AuthFilter
         - id: ms-practicante-service
           uri: lb://ms-practicante-service
           predicates:
-            - Path=/carta_aceptacion/**, /constancia/**, /inscripcion_convocatoria/**, /plan_ppp/**, /practicante/**
-
+            - Path=/carta_aceptacion/**, /constancia/**, /inscripcion_convocatoria/**, /plan_ppp/**, /practicante/**, /persoconvo/**
+          filters:
+            - AuthFilter
         - id: ms-consejo-service
           uri: lb://ms-consejo-service
           predicates:
             - Path=/informe/**, /revision/**
-
+          filters:
+            - AuthFilter
         - id: ms-supervisor-service
           uri: lb://ms-supervisor-service
           predicates:
             - Path=/supervisor/**, /evaluacion/**
-
+          filters:
+            - AuthFilter
         - id: ms-auth-service
           uri: lb://ms-auth-service
           predicates:

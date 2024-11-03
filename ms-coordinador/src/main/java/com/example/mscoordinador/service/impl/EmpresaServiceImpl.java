@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmpresaServiceImpl implements EmpresaService {
@@ -29,8 +28,13 @@ public class EmpresaServiceImpl implements EmpresaService {
     }
 
     @Override
-    public Empresa actualizar(Empresa empresa) {
-        return empresaRepository.save(empresa);
+    public Empresa actualizar(Integer id,Empresa empresa) {
+        Empresa empresaFromDb = buscarPorId(id);
+        empresaFromDb.setDireccion(empresa.getDireccion());
+        empresaFromDb.setEmail(empresa.getEmail());
+        empresaFromDb.setNombre(empresa.getNombre());
+        empresaFromDb.setTelefono(empresa.getTelefono());
+        return empresaRepository.save(empresaFromDb);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.mspracticante.service.impl;
 
+import com.example.mspracticante.dto.ConvocatoriaDto;
 import com.example.mspracticante.entity.Inscripcion_convocatoria;
 import com.example.mspracticante.feign.ConvocatoriaFeign;
 import com.example.mspracticante.repository.Inscripcion_convocatoriaRepository;
@@ -15,49 +16,81 @@ import java.util.Optional;
 
 @Service
 public class Inscripcion_convocatoriaServiceImpl implements Inscripcion_convocatoriaService {
+
     @Autowired
-    Inscripcion_convocatoriaRepository inscripcion_convocatoriaRepository;
+    private Inscripcion_convocatoriaRepository inscripcion_convocatoriaRepository;
 
     @Autowired
     private ConvocatoriaFeign convocatoriaFeign;
 
     @Override
     public List<Inscripcion_convocatoria> listar() {
-        List<Inscripcion_convocatoria> Inscripcion_convocatorias = inscripcion_convocatoriaRepository.findAll();
+        List<Inscripcion_convocatoria> inscripciones = inscripcion_convocatoriaRepository.findAll();
 
-        Inscripcion_convocatorias.forEach(Inscripcion_convocatoria -> {
-            Inscripcion_convocatoria.setConvocatoriaDto(convocatoriaFeign.buscarPOrId(Inscripcion_convocatoria.getConvocatoriaId()).getBody());
+        inscripciones.forEach(inscripcion -> {
+            try {
+                ResponseEntity<ConvocatoriaDto> response = convocatoriaFeign.buscarPOrId(inscripcion.getConvocatoriaId());
+                if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
+                    inscripcion.setConvocatoriaDto(response.getBody());
+                } else {
+                    inscripcion.setConvocatoriaDto(getFallbackConvocatoriaDto(inscripcion.getConvocatoriaId()));
+                }
+            } catch (Exception e) {
+                // En caso de error, asignar un valor por defecto (fallback)
+                inscripcion.setConvocatoriaDto(getFallbackConvocatoriaDto(inscripcion.getConvocatoriaId()));
+            }
         });
-        return Inscripcion_convocatorias;
+        return inscripciones;
     }
 
     @Override
-    public Inscripcion_convocatoria guardar(Inscripcion_convocatoria inscripcion_convocatoria) {
-        if (inscripcion_convocatoria.getPracticante() == null || !inscripcion_convocatoriaRepository.existsById(inscripcion_convocatoria.getPracticante().getId())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Practicante   con ID " + inscripcion_convocatoria.getPracticante().getId() + " no encontrada.");
-        }
-        ResponseEntity<?> response = convocatoriaFeign.buscarPOrId(inscripcion_convocatoria.getConvocatoriaId());
-        if (response.getStatusCode().is4xxClientError()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Convocatoria con ID " + inscripcion_convocatoria.getConvocatoriaId() + " no encontrado.");
-        }
-        return inscripcion_convocatoriaRepository.save(inscripcion_convocatoria);
+    public Inscripcion_convocatoria guardar(Inscripcion_convocatoria inscripcion) {
+        return inscripcion_convocatoriaRepository.save(inscripcion);
     }
 
     @Override
     public Inscripcion_convocatoria buscarPorId(Integer id) {
-        Inscripcion_convocatoria inscripcion_convocatoria = inscripcion_convocatoriaRepository.findById(id).get();
-        inscripcion_convocatoria.setConvocatoriaDto(convocatoriaFeign.buscarPOrId(inscripcion_convocatoria.getConvocatoriaId()).getBody());
-        return inscripcion_convocatoria;
+        Inscripcion_convocatoria inscripcion = inscripcion_convocatoriaRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Inscripción no encontrada"));
+
+        try {
+            ResponseEntity<ConvocatoriaDto> response = convocatoriaFeign.buscarPOrId(inscripcion.getConvocatoriaId());
+            if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
+                inscripcion.setConvocatoriaDto(response.getBody());
+            } else {
+                inscripcion.setConvocatoriaDto(getFallbackConvocatoriaDto(inscripcion.getConvocatoriaId()));
+            }
+        } catch (Exception e) {
+            // Asignar un valor por defecto (fallback) si ocurre un error
+            inscripcion.setConvocatoriaDto(getFallbackConvocatoriaDto(inscripcion.getConvocatoriaId()));
+        }
+
+        return inscripcion;
     }
 
     @Override
-    public Inscripcion_convocatoria actualizar(Inscripcion_convocatoria inscripcion_convocatoria) {
-        return inscripcion_convocatoriaRepository.save(inscripcion_convocatoria);
+    public Inscripcion_convocatoria actualizar(Inscripcion_convocatoria inscripcion) {
+        // Comprueba si la inscripción existe antes de actualizarla
+        if (!inscripcion_convocatoriaRepository.existsById(inscripcion.getId())) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Inscripción no encontrada");
+        }
+        return inscripcion_convocatoriaRepository.save(inscripcion);
     }
 
     @Override
     public void eliminar(Integer id) {
+        // Comprueba si la inscripción existe antes de eliminarla
+        if (!inscripcion_convocatoriaRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Inscripción no encontrada");
+        }
         inscripcion_convocatoriaRepository.deleteById(id);
+    }
 
+    private ConvocatoriaDto getFallbackConvocatoriaDto(Integer convocatoriaId) {
+        ConvocatoriaDto fallback = new ConvocatoriaDto();
+        fallback.setId(convocatoriaId);
+        fallback.setTitulo("No disponible");
+        fallback.setDescripcion("Información no disponible temporalmente");
+        return fallback;
     }
 }
