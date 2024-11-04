@@ -44,7 +44,7 @@ spring:
         - id: ms-supervisor-service
           uri: lb://ms-supervisor-service
           predicates:
-            - Path=/supervisor/**, /evaluacion/**
+            - Path=/supervisor/**, /evaluacion/**, /roles/**
         - id: ms-auth-service
           uri: lb://ms-auth-service
           predicates:

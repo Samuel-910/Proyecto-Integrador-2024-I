@@ -11,6 +11,7 @@ public class PersoConvo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String documento;
+    private String descripcion;
     private String estado;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "practicante_id")
