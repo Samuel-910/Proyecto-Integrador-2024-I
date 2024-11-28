@@ -23,4 +23,5 @@ public class Practicante {
     private Integer practicanteEdad;
     private String practicanteArea;
     private String practicanteEstado;
+    private Integer auth;
 }

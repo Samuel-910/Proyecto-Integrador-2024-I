@@ -31,9 +31,9 @@ public class Inscripcion_convocatoriaController {
         return ResponseEntity.ok(inscripcion_convocatoriaService.buscarPorId(id));
     }
 
-    @PutMapping
-    public ResponseEntity<Inscripcion_convocatoria> actualizar(@RequestBody Inscripcion_convocatoria inscripcion_convocatoria) {
-        return ResponseEntity.ok(inscripcion_convocatoriaService.actualizar(inscripcion_convocatoria));
+    @PutMapping("/{id}")
+    public ResponseEntity<Inscripcion_convocatoria> actualizar(@PathVariable(required = true) Integer id, @RequestBody Inscripcion_convocatoria inscripcion_convocatoria) {
+        return ResponseEntity.ok(inscripcion_convocatoriaService.actualizar(id,inscripcion_convocatoria));
 
     }
 

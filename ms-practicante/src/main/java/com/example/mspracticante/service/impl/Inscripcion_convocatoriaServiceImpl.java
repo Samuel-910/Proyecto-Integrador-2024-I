@@ -69,12 +69,19 @@ public class Inscripcion_convocatoriaServiceImpl implements Inscripcion_convocat
     }
 
     @Override
-    public Inscripcion_convocatoria actualizar(Inscripcion_convocatoria inscripcion) {
+    public Inscripcion_convocatoria actualizar(Integer id, Inscripcion_convocatoria inscripcion) {
+        // Buscar la inscripción existente en la base de datos
+        Inscripcion_convocatoria inscripcionFromDb = buscarPorId(id);
+        // Actualizar los campos primitivos
+        inscripcionFromDb.setInscripcionEstado(inscripcion.getInscripcionEstado());
+        inscripcionFromDb.setInscripcionGanador(inscripcion.getInscripcionGanador());
+        inscripcionFromDb.setConvocatoriaId(inscripcion.getConvocatoriaId());
         // Comprueba si la inscripción existe antes de actualizarla
         if (!inscripcion_convocatoriaRepository.existsById(inscripcion.getId())) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Inscripción no encontrada");
         }
-        return inscripcion_convocatoriaRepository.save(inscripcion);
+        // Guardar los cambios en el repositorio
+        return inscripcion_convocatoriaRepository.save(inscripcionFromDb);
     }
 
     @Override

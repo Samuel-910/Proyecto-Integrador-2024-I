@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/coordinador")
-@CrossOrigin
 public class CoordinadorController {
     @Autowired
     private CoordinadorService coordinadorService;

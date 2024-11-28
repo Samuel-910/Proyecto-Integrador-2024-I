@@ -11,7 +11,7 @@ public interface InduccionService {
 
     public Induccion buscarPorId(Integer id);
 
-    public Induccion actualizar(Induccion induccion);
+    public Induccion actualizar(Integer id, Induccion induccion);
 
     public void eliminar(Integer id);
 }

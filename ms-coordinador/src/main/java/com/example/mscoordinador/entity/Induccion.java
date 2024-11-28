@@ -37,4 +37,5 @@ public class Induccion {
     @Column(nullable = false)
     private String resultadosEsperados;
     private String observaciones;
+    private String estado;
 }

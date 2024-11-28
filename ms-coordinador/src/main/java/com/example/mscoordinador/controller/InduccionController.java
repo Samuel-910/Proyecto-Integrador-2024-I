@@ -1,5 +1,6 @@
 package com.example.mscoordinador.controller;
 
+import com.example.mscoordinador.entity.Empresa;
 import com.example.mscoordinador.entity.Induccion;
 import com.example.mscoordinador.service.InduccionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/induccion")
-@CrossOrigin
 public class InduccionController {
     @Autowired
     private InduccionService induccionService;
@@ -30,10 +30,9 @@ public class InduccionController {
         return ResponseEntity.ok(induccionService.buscarPorId(id));
     }
 
-    @PutMapping
-    public ResponseEntity<Induccion> actualizar(@RequestBody Induccion induccion) {
-        return ResponseEntity.ok(induccionService.actualizar(induccion));
-
+    @PutMapping("/{id}")
+    public ResponseEntity<Induccion> actualizar(@PathVariable(required = true) Integer id, @RequestBody Induccion induccion) {
+        return ResponseEntity.ok(induccionService.actualizar(id,induccion));
     }
 
     @DeleteMapping("/{id}")

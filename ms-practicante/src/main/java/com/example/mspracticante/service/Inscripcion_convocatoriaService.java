@@ -11,7 +11,7 @@ public interface Inscripcion_convocatoriaService {
 
     public Inscripcion_convocatoria buscarPorId(Integer id);
 
-    public Inscripcion_convocatoria actualizar(Inscripcion_convocatoria inscripcion_convocatoria);
+    public Inscripcion_convocatoria actualizar(Integer id,Inscripcion_convocatoria inscripcion_convocatoria);
 
     public void eliminar(Integer id);
 

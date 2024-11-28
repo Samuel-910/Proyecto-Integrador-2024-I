@@ -1,19 +1,24 @@
 package com.example.msauth.security;
 
 import com.example.msauth.entity.AuthUser;
+import com.example.msauth.entity.Role;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
 import javax.annotation.PostConstruct;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 @Component
-public class JwtProvider    {
+public class JwtProvider {
     @Value("${jwt.secret}")
     private String secret;
+
     @PostConstruct
     protected void init() {
         secret = Base64.getEncoder().encodeToString(secret.getBytes());
@@ -23,8 +28,13 @@ public class JwtProvider    {
         Map<String, Object> claims = new HashMap<>();
         claims = Jwts.claims().setSubject(authUser.getUserName());
         claims.put("id", authUser.getId());
+        claims.put("roles", authUser.getRoles().stream()
+                .map(Role::getRoleName)
+                .collect(Collectors.toList())); // Añadimos roles al token
+
         Date now = new Date();
-        Date exp = new Date(now.getTime() + 3600000);
+        Date exp = new Date(now.getTime() + 3600000); // Expiración en 1 hora
+
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
@@ -36,18 +46,32 @@ public class JwtProvider    {
     public boolean validate(String token) {
         try {
             Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
-
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
-    public String getUserNameFromToken(String token){
+    public String getUserNameFromToken(String token) {
         try {
-            return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
-        }catch (Exception e) {
+            return Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();
+        } catch (Exception e) {
             return "bad token";
+        }
+    }
+
+    public Map<String, Object> getClaimsFromToken(String token) {
+        try {
+            return Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (Exception e) {
+            return null;
         }
     }
 }

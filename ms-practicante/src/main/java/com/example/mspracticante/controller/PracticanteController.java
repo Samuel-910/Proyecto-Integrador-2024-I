@@ -1,8 +1,10 @@
 package com.example.mspracticante.controller;
 
 import com.example.mspracticante.entity.Practicante;
+import com.example.mspracticante.repository.PracticanteRepository;
 import com.example.mspracticante.service.PracticanteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,9 @@ import java.util.List;
 public class PracticanteController {
     @Autowired
     private PracticanteService practicanteService;
+
+    @Autowired
+    private PracticanteRepository practicanteRepository;
 
     @GetMapping
     public ResponseEntity<List<Practicante>> listar() {
@@ -38,5 +43,14 @@ public class PracticanteController {
     public ResponseEntity<List<Practicante>> eliminar(@PathVariable(required = true) Integer id) {
         practicanteService.eliminar(id);
         return ResponseEntity.ok(practicanteService.listar());
+    }
+    @GetMapping("/auth/{authId}")
+    public ResponseEntity<Practicante> getPracticanteByAuth(@PathVariable int authId) {
+        Practicante practicante = practicanteRepository.findByAuth(authId);
+        if (practicante != null) {
+            return ResponseEntity.ok(practicante);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 }
